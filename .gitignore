@@ -1,0 +1,5 @@
+*.exe
+*.out
+Thumbs.db
+.DS_Store
+*.tiled-session
