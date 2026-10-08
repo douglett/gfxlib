@@ -26,4 +26,11 @@ struct Sprite : Paintable {
 		Rectangle dst{ xoff+x+ori.x, yoff+y+ori.y, float(width), float(height) };
 		DrawTexturePro(Assets::gettexture(textureid), src, dst, ori, rot, blend);
 	}
+
+	int collide(shared_ptr<Sprite> spr) {
+		return spr.get() == NULL ? 0 : collide(*spr);
+	}
+	int collide(const Sprite& spr) {
+		return !(x > spr.x+spr.width || y > spr.y+spr.height || spr.x > x+height || spr.y > y+height);
+	}
 };
