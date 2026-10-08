@@ -1,5 +1,6 @@
 #pragma once
 #include "raylib.h"
+#include <string>
 #include <vector>
 #include <cstdint>
 using namespace std;

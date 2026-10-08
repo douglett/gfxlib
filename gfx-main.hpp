@@ -2,6 +2,7 @@
 #include "raylib.h"
 #include "qbfont.hpp"
 #include "framebuffer.hpp"
+#include <string>
 
 struct GFX {
 	struct rect { int x, y, w, h; };
