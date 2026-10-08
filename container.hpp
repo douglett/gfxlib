@@ -17,8 +17,11 @@ struct Container : Paintable {
 			if (children.at(i)->id == id)
 				children.erase(children.begin()+i), i--;
 	}
+
+	static bool zcompare(const Paintable::ptr a, const Paintable::ptr b) { return a->z < b->z; }
 	
 	virtual void paint(int xoff, int yoff) {
+		sort(children.begin(), children.end(), zcompare);
 		for (auto &c : children)
 			c->paint(xoff + x, yoff + y);
 	}
