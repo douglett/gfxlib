@@ -3,6 +3,7 @@
 #include "qbfont.hpp"
 #include "framebuffer.hpp"
 #include <string>
+#include <cmath>
 
 struct GFX {
 	struct rect { int x, y, w, h; };
@@ -97,14 +98,7 @@ struct GFX {
 	static void fullscreen() { togglestate(FLAG_BORDERLESS_WINDOWED_MODE); }
 	static void resizable()  { togglestate(FLAG_WINDOW_RESIZABLE); }
 	static void togglestate(ConfigFlags flag) { IsWindowState(flag) ? ClearWindowState(flag) : SetWindowState(flag); }
-	static float dir2rot(int dir) { return 360.0 / 4 * dir; }
-	static rect dir2point(int dir, int d=1) {
-		switch (dir) {
-			case 0:   return {  0, -d };
-			case 1:   return {  d,  0 };
-			case 2:   return {  0,  d };
-			case 3:   return { -d,  0 };
-			default:  return {  0,  0 };
-		}
-	}
+	static float   dir2rot(int dir) { return 360.0 / 4 * dir; }
+	static Vector2 rot2point(float rot, float d=1) { return { (float)sin(rot*DEG2RAD)*d, (float)sin((rot+270)*DEG2RAD)*d }; }
+	static Vector2 dir2point(int   dir, float d=1) { return rot2point(90*dir, d); }
 };
