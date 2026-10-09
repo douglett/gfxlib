@@ -19,7 +19,8 @@ struct GFX {
 	static int init(int width=800, int height=600, const string& name="GFX:Game") {
 		SetTraceLogLevel(LOG_WARNING);
 		InitWindow(width, height, name.c_str());
-		if (!IsWindowReady())  return 1;
+		if (!IsWindowReady())
+			return fprintf(stderr, "Screen initialize failed\n"), 1;
 		SetTargetFPS(60);
 		// submodules
 		font.init();
