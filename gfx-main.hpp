@@ -69,6 +69,9 @@ struct GFX {
 	static void print(const string& str, int x, int y, Color col=WHITE) {
 		font.print(str, x, y, col);
 	}
+	static void printm(const vector<string>& vs, int x, int y, Color col=WHITE) {
+		font.printm(vs, x, y, col);
+	}
 	static void text(const string& str, int x, int y, Color col=WHITE) {
 		DrawText(str.c_str(), x, y, 10, col);
 	}

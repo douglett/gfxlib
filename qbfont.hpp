@@ -58,6 +58,11 @@ struct QBFont {
 	int width(const string& s) {
 		return s.length() * font().charw;
 	}
+	void printm(const vector<string>& vs, int x, int y, Color col=WHITE) {
+		const Font& f = font();
+		for (size_t i = 0; i < vs.size(); i++)
+			print(vs[i], x, y+f.charh*i, col);
+	}
 	void print(string str, int x, int y, Color col=WHITE) {
 		// replace special characters
 		for (size_t i = 0; i < str.length(); i++)
@@ -75,6 +80,24 @@ struct QBFont {
 			dst.x = x + i*f.charw;
 			DrawTextureRec(f.texture, src, dst, col);
 		}
+	}
+
+	// string functions
+	vector<string> split(const string& str, const string& sep="\n") {
+		vector<string> vs;
+		string s;
+		for (size_t i = 0; i < str.length(); i++)
+			if (str.substr(i, sep.length()) == sep)
+				vs.push_back(s), s = "", i += sep.length()-1;
+			else  s += str[i];
+		if (s.length())  vs.push_back(s);
+		return vs;
+	}
+	string join(const vector<string>& vs, const string& glue=" ") {
+		string s;
+		for (size_t i = 0; i < vs.size(); i++)
+			s += vs[i] + (i < vs.size()-1 ? glue : "");
+		return s;
 	}
 };
 
